@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="mainDiv1"></div>
+    <div id="mainDiv2"></div>
+
+    <script type="text/babel">
+      // Creating elements using react and giving them their attributes:
+      let element1 = React.createElement("h1", null, "This is me");
+      let element2 = React.createElement("h2", {
+        children: "This is me too",
+        className: "text",
+        id: "textElement2",
+      });
+
+      console.log(element2);
+
+      //   Rendering elements on the screen:
+      ReactDOM.render(element2, document.getElementById("mainDiv2"));
+
+      //   Creating elements inside elements:
+      let innerSpan = React.createElement("span", null, "Span is here now!");
+      element1 = React.createElement("h1", { children: innerSpan });
+      ReactDOM.render(element1, document.getElementById("mainDiv1"));
+
+      // Checking React version:
+      console.log(React.version);
+
+      //   jsx:
+      //   Here comes the use of Babel.
+      //   Note: At the end jsx also uses React.createElement() function to create elements if you want to try it then you can log a function containing jsx as shown at line 95.
+      let myEl1 = (
+        <div>
+          <h1>
+            <span>Hello JSX</span>
+          </h1>
+        </div>
+      );
+      ReactDOM.render(myEl1, document.getElementById("mainDiv1"));
+
+      //   What if I want to give a variable instead of that value Hello JSX in the span above?
+
+      // Ans: In JSX, if you want to move from JSX to JavaScript instantly. You can use curly braces as shown below:
+
+      let myTitle1 = "Hello JSX again!";
+      let myH1 = (
+        <h1>
+          <span>{myTitle1}</span>
+        </h1>
+      );
+      let myEl2 = <div>{myH1}</div>;
+      ReactDOM.render(myEl2, document.getElementById("mainDiv2"));
+
+      //   React components:
+      // Remember to use PascalCase.
+      let MyTitle2 = "Hello JSX again 2!";
+      let MyH1 = () => (
+        <h1>
+          <span>{MyTitle2}</span>
+        </h1>
+      );
+
+      // But if you are using function statement to create a function instead of arrow function you would have to make if as shown below with return statement.
+
+      function MyH1_2() {
+        return (
+          <h1>
+            <span>{MyTitle2}</span>
+          </h1>
+        );
+      }
+
+      let MyEl3 = (
+        <div>
+          <MyH1_2></MyH1_2>
+        </div>
+      );
+      console.log(MyH1);
+      ReactDOM.render(MyEl3, document.getElementById("mainDiv2"));
+    </script>
+  </body>
+</html>
